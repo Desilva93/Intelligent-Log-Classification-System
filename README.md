@@ -283,36 +283,3 @@ to access the interactive API documentation.
 * Model Deployment
 * Hybrid AI Systems
 
----
-
-## Future Improvements
-
-* Active Learning Pipeline
-* Real-Time Monitoring Dashboard
-* Vector Database Integration
-* Continual Model Training
-* Explainable AI Support
-* Multi-Language Log Classification
-
----
-
-## License
-
-This project is distributed under the MIT License.
-
----
-
-## Author
-
-**Desilva Roy**
-
-M.Tech, Indian Institute of Science (IISc)
-
-Interests:
-
-* Natural Language Processing
-* Large Language Models
-* Machine Learning
-* Information Retrieval
-* Generative AI
-
