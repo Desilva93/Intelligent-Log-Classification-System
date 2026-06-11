@@ -7,6 +7,11 @@ The Intelligent Log Classification System is a hybrid NLP-powered framework desi
 By integrating multiple classification strategies, the framework provides accurate and scalable log categorization for monitoring, debugging, and operational analysis.
 
 ---
+## System Architecture
+
+![System Architecture](resources/architecture.png)
+
+---
 
 ## Hybrid Classification Framework
 
