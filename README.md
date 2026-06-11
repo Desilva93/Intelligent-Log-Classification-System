@@ -55,30 +55,54 @@ This stage is particularly useful for:
 
 ## Project Structure
 
-```text
 Intelligent-Log-Classification-System/
 │
 ├── models/
-│   └── Saved Logistic Regression model
+│   └── log_classifier.joblib
+│       # Trained Logistic Regression model used for log classification.
 │
 ├── resources/
+│   ├── architecture.png
 │   ├── test.csv
-│   ├── output.csv
+│   └── output.csv
+│       # Contains architecture diagrams, sample input logs, and generated classification results.
 │
 ├── training/
-│   ├── Model training scripts
-│   ├── Dataset files
-│   └── Experiment notebooks
+│   ├── dataset/
+│   │   └── synthetic_logs.csv
+│   │       # Synthetic enterprise log dataset used for model training and evaluation.
+│   │
+│   └── log_classification.ipynb
+│       # Jupyter notebook for data preprocessing, embedding generation,
+│       # model training, and performance evaluation.
 │
 ├── classify.py
+│   # Main classification pipeline that routes logs through
+│   # Regex, ML, and LLM-based classifiers.
+│
 ├── processor_regex.py
+│   # Rule-based classifier using Regular Expressions
+│   # for structured and predictable log patterns.
+│
 ├── processor_bert.py
+│   # Semantic classification module using Sentence Transformers
+│   # and Logistic Regression for supervised prediction.
+│
 ├── processor_llm.py
+│   # LLM-powered classifier for handling complex,
+│   # ambiguous, and previously unseen log messages.
+│
 ├── server.py
+│   # FastAPI application providing REST APIs
+│   # for batch log classification.
+│
 ├── requirements.txt
-└── .env
-```
-
+│   # List of Python dependencies required to run the project.
+│
+├── .gitignore
+├── LICENSE
+└── README.md
+   
 ---
 
 ## Technologies Used
