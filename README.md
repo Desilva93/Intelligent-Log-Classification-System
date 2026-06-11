@@ -55,6 +55,8 @@ This stage is particularly useful for:
 
 ## Project Structure
 
+```bash
+
 Intelligent-Log-Classification-System/
 │
 ├── models/
@@ -102,6 +104,8 @@ Intelligent-Log-Classification-System/
 ├── .gitignore
 ├── LICENSE
 └── README.md
+
+```
    
 ---
 
