@@ -1,183 +1,73 @@
 # Intelligent Log Classification System
 
-A Hybrid NLP-powered log classification framework that combines **Regex Rules**, **Sentence Transformers**, **Machine Learning**, and **Large Language Models (LLMs)** to automatically categorize system logs with high accuracy and scalability.
+## Overview
+
+The Intelligent Log Classification System is a hybrid NLP-powered framework designed to automatically categorize enterprise and application logs. The system combines rule-based methods, machine learning models, and Large Language Models (LLMs) to efficiently handle logs with varying levels of complexity.
+
+By integrating multiple classification strategies, the framework provides accurate and scalable log categorization for monitoring, debugging, and operational analysis.
 
 ---
 
-## Project Overview
+## Hybrid Classification Framework
 
-Modern applications generate massive amounts of logs from servers, databases, authentication systems, cloud services, and network devices. Manually analyzing these logs is time-consuming and error-prone.
-
-This project implements an intelligent multi-stage classification pipeline that automatically assigns categories to log messages using:
-
-* Rule-Based Classification (Regex)
-* Semantic Classification (Sentence Transformers + Logistic Regression)
-* LLM-Based Classification for unseen logs
-
-The hybrid architecture ensures both speed and accuracy by selecting the most suitable classification strategy for each log message.
-
----
-
-## Problem Statement
-
-Organizations rely on logs to monitor application health and diagnose issues. Traditional log monitoring systems struggle when:
-
-* New log patterns appear
-* Error messages vary significantly
-* Rules become difficult to maintain
-* Large volumes of logs need processing
-
-This project addresses these challenges by combining traditional NLP techniques with modern Large Language Models.
-
----
-
-## Solution Architecture
-
-```text
-Incoming Log Message
-        │
-        ▼
- ┌─────────────────┐
- │ Regex Matching  │
- └─────────────────┘
-        │
-   Match Found?
-      /      \
-    Yes       No
-    │          │
-    ▼          ▼
-
- Return    Sentence Transformer
- Category          │
-                   ▼
-         Logistic Regression
-                   │
-          High Confidence?
-             /       \
-           Yes        No
-           │           │
-           ▼           ▼
-
-       Return         LLM
-      Category   Classification
-                       │
-                       ▼
-                Return Category
-```
-
----
-
-## Classification Approaches
+The system uses a three-stage classification pipeline:
 
 ### 1. Regex-Based Classification
 
-Used for structured and predictable log patterns.
+The first stage handles predictable and structured log patterns using predefined regular expression rules.
 
-Example:
+Examples:
 
-```text
-User login successful
-```
-
-Advantages:
-
-* Fast execution
-* Easy interpretation
-* No training required
-
----
+* HTTP status logs
+* Authentication events
+* IP blocking messages
+* System activity logs
 
 ### 2. Sentence Transformer + Logistic Regression
 
-For categories with sufficient training examples.
+For logs that cannot be classified through regex, semantic embeddings are generated using Sentence Transformers.
 
-Workflow:
-
-```text
-Log Message
-      │
-      ▼
-Sentence Transformer
-      │
-      ▼
-Embedding Vector
-      │
-      ▼
-Logistic Regression
-      │
-      ▼
-Predicted Category
-```
+These embeddings are passed to a Logistic Regression classifier trained on labeled log data.
 
 Advantages:
 
-* Captures semantic meaning
-* Lightweight inference
-* High classification accuracy
-
----
+* Captures contextual meaning
+* Works well with sufficient training examples
+* Fast inference
 
 ### 3. LLM-Based Classification
 
-Used when confidence from previous stages is low or when logs contain unseen patterns.
+When logs are ambiguous or insufficient labeled examples exist, the system uses Large Language Models (LLMs) to determine the appropriate category.
 
-Example:
+This stage is particularly useful for:
+
+* Legacy systems
+* Rare events
+* Complex workflow failures
+* Deprecation notices
+
+---
+
+## System Architecture
 
 ```text
-Unexpected timeout while synchronizing distributed cache cluster
+Input Log Messages
+        │
+        ▼
+ Regex Classifier
+        │
+        ▼
+Sentence Transformer
+        │
+        ▼
+Logistic Regression
+        │
+        ▼
+    LLM Layer
+        │
+        ▼
+ Classified Output
 ```
-
-Advantages:
-
-* Understands context
-* Handles previously unseen logs
-* Strong generalization ability
-
----
-
-## Features
-
-* Hybrid AI Architecture
-* Multi-Stage Classification Pipeline
-* Semantic Text Understanding
-* LLM Fallback Mechanism
-* FastAPI Deployment
-* Scalable Design
-* Production-Oriented Workflow
-
----
-
-## Technology Stack
-
-### Programming Language
-
-* Python
-
-### Natural Language Processing
-
-* Sentence Transformers
-* Hugging Face Transformers
-
-### Machine Learning
-
-* Logistic Regression
-* Scikit-Learn
-
-### Backend
-
-* FastAPI
-* Uvicorn
-
-### Data Processing
-
-* Pandas
-* NumPy
-
-### Large Language Models
-
-* OpenAI Compatible Models
-* DeepSeek Models
-* Llama Models
 
 ---
 
@@ -186,37 +76,80 @@ Advantages:
 ```text
 Intelligent-Log-Classification-System/
 │
+├── models/
+│   └── Saved Logistic Regression model
+│
+├── resources/
+│   ├── test.csv
+│   ├── output.csv
+│
+├── training/
+│   ├── Model training scripts
+│   ├── Dataset files
+│   └── Experiment notebooks
+│
 ├── classify.py
+├── processor_regex.py
+├── processor_bert.py
+├── processor_llm.py
 ├── server.py
 ├── requirements.txt
-├── README.md
-│
-├── models/
-├── resources/
-├── training/
-├── notebooks/
-│
-└── screenshots/
-    ├── architecture.png
-    └── demo.png
+└── .env
 ```
+
+---
+
+## Technologies Used
+
+### Backend
+
+* FastAPI
+* Uvicorn
+
+### Machine Learning
+
+* Scikit-Learn
+* Logistic Regression
+* DBSCAN
+
+### NLP
+
+* Sentence Transformers
+* Regular Expressions
+* BERT
+
+### LLM
+
+* Groq API
+* Llama Models
+
+### Data Processing
+
+* Pandas
+* NumPy
 
 ---
 
 ## Installation
 
-Clone the repository:
+### Clone Repository
 
 ```bash
 git clone https://github.com/Desilva93/Intelligent-Log-Classification-System.git
-
-cd Intelligent-Log-Classification-System
 ```
 
-Install dependencies:
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
+```
+
+### Configure Environment Variables
+
+Create a `.env` file and add:
+
+```text
+GROQ_API_KEY=your_api_key_here
 ```
 
 ---
@@ -229,57 +162,49 @@ Start the FastAPI server:
 uvicorn server:app --reload
 ```
 
-Open:
+Server URLs:
 
 ```text
-http://127.0.0.1:8000/docs
-```
-
-to access the interactive API documentation.
-
----
-
-## API Example
-
-### Request
-
-```json
-{
-  "log": "Database connection timeout"
-}
-```
-
-### Response
-
-```json
-{
-  "category": "Database Error"
-}
+http://127.0.0.1:8000
 ```
 
 ---
 
-## Sample Predictions
+## Input Format
 
-| Log Message                         | Predicted Category |
-| ----------------------------------- | ------------------ |
-| User login successful               | Authentication     |
-| Password validation failed          | Authentication     |
-| Database connection timeout         | Database Error     |
-| Packet loss detected                | Network Issue      |
-| Service unavailable due to overload | System Failure     |
+Upload a CSV file containing:
+
+| Column      | Description               |
+| ----------- | ------------------------- |
+| source      | System generating the log |
+| log_message | Log text to classify      |
+
+Example:
+
+```csv
+source,log_message
+ModernCRM,User login successful
+LegacyCRM,Workflow execution failed due to missing dependency
+```
 
 ---
 
-## Skills Demonstrated
+## Output Format
 
-* Natural Language Processing (NLP)
-* Sentence Embeddings
-* Text Classification
-* Machine Learning
-* Large Language Models (LLMs)
-* Prompt Engineering
-* FastAPI Development
-* Model Deployment
-* Hybrid AI Systems
+The system generates a classified CSV file containing:
 
+| Column       | Description          |
+| ------------ | -------------------- |
+| source       | Log source           |
+| log_message  | Original log message |
+| target_label | Predicted category   |
+
+Example:
+
+```csv
+source,log_message,target_label
+ModernCRM,User login successful,User Activity
+LegacyCRM,Workflow execution failed,Workflow Error
+```
+
+---
