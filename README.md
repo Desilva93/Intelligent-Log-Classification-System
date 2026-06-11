@@ -193,39 +193,49 @@ http://127.0.0.1:8000
 
 ## Input Format
 
-Upload a CSV file containing:
+The system accepts a CSV file uploaded through the FastAPI endpoint. The input file must contain the following columns:
 
-| Column      | Description               |
-| ----------- | ------------------------- |
-| source      | System generating the log |
-| log_message | Log text to classify      |
+| Column      | Description                                                  |
+| ----------- | ------------------------------------------------------------ |
+| source      | Name of the application or system generating the log message |
+| log_message | Raw log text that needs to be classified                     |
 
-Example:
+### Example Input
 
 ```csv
 source,log_message
-ModernCRM,User login successful
-LegacyCRM,Workflow execution failed due to missing dependency
+ModernCRM,IP 192.168.133.114 blocked due to potential attack
+BillingSystem,User 12345 logged in.
+LegacyCRM,Case escalation for ticket ID 7324 failed because the assigned support agent is no longer active.
 ```
+
+The uploaded CSV is processed row by row, and each log message is passed through the hybrid classification pipeline.
 
 ---
 
 ## Output Format
 
-The system generates a classified CSV file containing:
+After classification, the system generates a new CSV file containing all original columns along with an additional column:
 
-| Column       | Description          |
-| ------------ | -------------------- |
-| source       | Log source           |
-| log_message  | Original log message |
-| target_label | Predicted category   |
+| Column       | Description                                                 |
+| ------------ | ----------------------------------------------------------- |
+| source       | Original log source                                         |
+| log_message  | Original log message                                        |
+| target_label | Predicted category assigned by the classification framework |
 
-Example:
+### Example Output
 
 ```csv
 source,log_message,target_label
-ModernCRM,User login successful,User Activity
-LegacyCRM,Workflow execution failed,Workflow Error
+ModernCRM,IP 192.168.133.114 blocked due to potential attack,Security Alert
+BillingSystem,User 12345 logged in.,User Action
+LegacyCRM,Case escalation for ticket ID 7324 failed because the assigned support agent is no longer active.,Workflow Error
 ```
 
----
+The classified results are saved as:
+
+```text
+resources/output.csv
+```
+
+and returned to the user through the FastAPI API for download.
