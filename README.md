@@ -53,29 +53,6 @@ This stage is particularly useful for:
 
 ---
 
-## System Architecture
-
-```text
-Input Log Messages
-        │
-        ▼
- Regex Classifier
-        │
-        ▼
-Sentence Transformer
-        │
-        ▼
-Logistic Regression
-        │
-        ▼
-    LLM Layer
-        │
-        ▼
- Classified Output
-```
-
----
-
 ## Project Structure
 
 ```text
