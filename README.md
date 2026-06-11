@@ -120,8 +120,15 @@ Intelligent-Log-Classification-System/
 
 * Scikit-Learn
 * Logistic Regression
-* DBSCAN
 
+### Clustering & Pattern Discovery	
+
+* DBSCAN
+  
+### Embedding Models	
+
+* all-MiniLM-L6-v2
+  
 ### NLP
 
 * Sentence Transformers
@@ -131,12 +138,16 @@ Intelligent-Log-Classification-System/
 ### LLM
 
 * Groq API
-* Llama Models
+* Llama Models(Llama 3.3 70B Versatile)
 
 ### Data Processing
 
 * Pandas
 * NumPy
+  
+### API Testing
+
+* Postman
 
 ---
 
