@@ -239,3 +239,31 @@ resources/output.csv
 ```
 
 and returned to the user through the FastAPI API for download.
+
+## Evaluation
+
+The proposed Hybrid Classification Framework was evaluated against a Keyword-Based Classification baseline using the synthetic enterprise log dataset.
+
+### Results
+
+| Metric   | Keyword-Based | Hybrid Framework |
+| -------- | ------------- | ---------------- |
+| Accuracy | 78.34%        | 99.29%           |
+| Coverage | 92.03%        | 99.71%           |
+
+### Key Observations
+
+* Improved classification accuracy by **26.74%** over the keyword-based approach.
+* Increased log coverage from **92.03%** to **99.71%**, reducing unclassified logs.
+* Effectively handled semantically similar, unseen, and complex log messages through the combination of Regex, Sentence Transformers, Logistic Regression, and LLM-based classification.
+
+### Evaluation Visualizations
+
+#### Performance Comparison Table
+
+![Performance Table](performance_table.png)
+
+#### Performance Comparison Chart
+
+![Performance Chart](performance_bar_chart.png)
+
