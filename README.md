@@ -82,6 +82,16 @@ Intelligent-Log-Classification-System/
 │   # Main classification pipeline that routes logs through
 │   # Regex, ML, and LLM-based classifiers.
 │
+├── evaluation.ipynb
+│  # Notebook containing model evaluation, baseline comparison,
+│  # performance metrics, and visualization generation.
+│
+├── performance_table.png
+│  # Tabular comparison of Keyword-Based and Hybrid classifiers.
+│
+├── performance_bar_chart.png
+│  # Visual comparison of classification performance metrics.
+│
 ├── processor_regex.py
 │   # Rule-based classifier using Regular Expressions
 │   # for structured and predictable log patterns.
